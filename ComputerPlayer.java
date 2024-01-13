@@ -12,6 +12,10 @@ public class ComputerPlayer {
         this.targetBoard = new Board();
     }
 
+    public Ship[] getShips() {
+        return ships;
+    }
+
     public void placeShips() {
         Randomizer randomizer = new Randomizer();
 

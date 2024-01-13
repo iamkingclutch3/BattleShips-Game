@@ -49,7 +49,7 @@ public class Player {
 
     public boolean takeTurn(ComputerPlayer opponent) {
         Scanner scanner = new Scanner(System.in);
-        this.displayGameBoards();
+        this.displayGameBoards(opponent);
 
         System.out.println("It's player's turn!");
         System.out.print("Enter the target row (A-J): ");
@@ -90,17 +90,18 @@ public class Player {
         ownBoard.displayBoard();
     }
 
-    public void displayGameBoards() {
+    public void displayGameBoards(ComputerPlayer opponent) {
+        System.out.println("\n\nPlayer remaining ships: " + this.ships.length + "\nComputer remaining ships: " + opponent.getShips().length + "\n\n");
         System.out.println("Player's Game Boards:");
         System.out.println("Target Board\t\t\t\t\tOwn Board");
 
         System.out.print("  ");
-        for (int i = 0; i < targetBoard.getSize(); i++) {
+        for (int i = 1; i < targetBoard.getSize() + 1; i++) {
             System.out.print(i + " ");
         }
         System.out.print("\t\t\t\t  ");
 
-        for (int i = 0; i < ownBoard.getSize(); i++) {
+        for (int i = 1; i < ownBoard.getSize() + 1; i++) {
             System.out.print(i + " ");
         }
 
