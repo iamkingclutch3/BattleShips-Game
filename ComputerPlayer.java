@@ -10,10 +10,9 @@ public class ComputerPlayer {
         this.ships = new Ship[NUM_OF_SHIPS];
         this.ownBoard = new Board();
         this.targetBoard = new Board();
-        this.placeShips();
     }
 
-    private void placeShips() {
+    public void placeShips() {
         Randomizer randomizer = new Randomizer();
 
         for (int i = 0; i < NUM_OF_SHIPS; i++) {
@@ -40,6 +39,11 @@ public class ComputerPlayer {
 
         int row = randomizer.nextInt(10);
         int col = randomizer.nextInt(10);
+
+        while(targetBoard.getGrid()[row][col] == 'X' || targetBoard.getGrid()[row][col] == 'O') {
+            row = randomizer.nextInt(10);
+            col = randomizer.nextInt(10);
+        }
 
         boolean hit = opponent.takeShot(row, col);
 

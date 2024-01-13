@@ -64,18 +64,12 @@ public class Board {
                 if (grid[row][i] != '-')
                     return false;
             }
-            for (int i = col; i < col + length; i++) {
-                grid[row][i] = 'S';
-            }
         } else {
             if (row + length > size)
                 return false;
             for (int i = row; i < row + length; i++) {
                 if (grid[i][col] != '-')
                     return false;
-            }
-            for (int i = row; i < row + length; i++) {
-                grid[i][col] = 'S';
             }
         }
 
@@ -110,11 +104,9 @@ public class Board {
 
         if (grid[row][col] == '-') {
             grid[row][col] = 'O';
-            System.out.println("Miss!");
             return false;
         } else if (grid[row][col] == 'S') {
             grid[row][col] = 'X';
-            System.out.println("Hit!");
             return true;
         } else if (grid[row][col] == 'X' || grid[row][col] == 'O') {
             System.out.println("You have already shot at this location.");
