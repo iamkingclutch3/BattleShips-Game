@@ -2,19 +2,14 @@ public class ComputerPlayer {
     private static final int[] SHIP_LENGTHS = {2, 3, 3, 4, 5};
     private static final int NUM_OF_SHIPS = 5;
 
-    private Ship[] ships;
     private Board ownBoard;
     private Board targetBoard;
 
     public ComputerPlayer() {
-        this.ships = new Ship[NUM_OF_SHIPS];
         this.ownBoard = new Board();
         this.targetBoard = new Board();
     }
 
-    public Ship[] getShips() {
-        return ships;
-    }
 
     public void placeShips() {
         Randomizer randomizer = new Randomizer();
@@ -32,7 +27,6 @@ public class ComputerPlayer {
 
                 if (ownBoard.placeShip(newShip)) {
                     placed = true;
-                    ships[i] = newShip;
                 }
             }
         }
@@ -53,6 +47,7 @@ public class ComputerPlayer {
 
         if (hit) {
             targetBoard.updateCell(row, col, 'X');
+            this.takeTurn(opponent);
         } else {
             targetBoard.updateCell(row, col, 'O');
         }
@@ -65,6 +60,13 @@ public class ComputerPlayer {
     }
 
     public boolean isGameOver() {
-        return ships.length == 0;
+        for (int i = 0; i < ownBoard.getSize(); i++) {
+            for (int j = 0; j < ownBoard.getSize(); j++) {
+                if (ownBoard.getGrid()[i][j] == 'S') {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

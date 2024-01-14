@@ -1,3 +1,0 @@
-- Check when a boat is detroyed
-    On hit, get length of the boat and rest one
-    If length is 0, boat is destroyed and its loged on console

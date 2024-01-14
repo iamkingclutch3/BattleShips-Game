@@ -21,6 +21,21 @@ public class Battleship {
             computer.takeTurn(player);
         }
 
-        System.out.println("Game over!");
+        System.out.println("\n\n\n\nGame over!");
+        if (player.isGameOver()) {
+            player.displayGameBoards(computer);
+            System.out.println("You lost! Computer Won!");
+            System.out.print("Press enter to try again...");
+            scanner.nextLine();
+            System.out.println("\n\n\n\n");
+            main(args);
+        } else {
+            player.displayGameBoards(computer);
+            System.out.println("You won!");
+            System.out.print("Press enter to try again...");
+            scanner.nextLine();
+            System.out.println("\n\n\n\n");
+            main(args);
+        }
     }
 }

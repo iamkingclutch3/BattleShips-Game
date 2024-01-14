@@ -4,7 +4,6 @@ public class Player {
     private static final int[] SHIP_LENGTHS = {2, 3, 3, 4, 5};
     private static final int NUM_OF_SHIPS = 5;
 
-    private Ship[] ships = new Ship[NUM_OF_SHIPS];
     private Board ownBoard;
     private Board targetBoard;
 
@@ -38,10 +37,9 @@ public class Player {
 
                 if (ownBoard.placeShip(newShip)) {
                     placed = true;
-                    ships[i] = newShip;
-                    System.out.println("Ship placed!");
+                    System.out.println("Ship placed!\n\n\n\n");
                 } else {
-                    System.out.println("Invalid placement. Please try again.");
+                    System.out.println("\n\n\n\nInvalid placement. Please try again.");
                 }
             }
         }
@@ -69,6 +67,7 @@ public class Player {
         if (hit) {
             targetBoard.updateCell(row, col, 'X');
             System.out.println("Hit!");
+            this.takeTurn(opponent);
         } else {
             targetBoard.updateCell(row, col, 'O');
             System.out.println("Miss!");
@@ -82,7 +81,14 @@ public class Player {
     }
 
     public boolean isGameOver() {
-        return ships.length == 0;
+        for (int i = 0; i < ownBoard.getSize(); i++) {
+            for (int j = 0; j < ownBoard.getSize(); j++) {
+                if (ownBoard.getGrid()[i][j] == 'S') {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public void displayOwnBoard() {
@@ -91,7 +97,6 @@ public class Player {
     }
 
     public void displayGameBoards(ComputerPlayer opponent) {
-        System.out.println("\n\nPlayer remaining ships: " + this.ships.length + "\nComputer remaining ships: " + opponent.getShips().length + "\n\n");
         System.out.println("Player's Game Boards:");
         System.out.println("Target Board\t\t\t\t\tOwn Board");
 

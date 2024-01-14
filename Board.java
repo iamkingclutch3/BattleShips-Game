@@ -15,10 +15,6 @@ public class Board {
         return grid;
     }
 
-    public void setGrid(char[][] grid) {
-        this.grid = grid;
-    }
-
     public int getSize() {
         return size;
     }
@@ -57,39 +53,27 @@ public class Board {
         int length = ship.getLength();
         boolean horizontal = ship.isHorizontal();
 
-        if (horizontal) { // Checks if the ship fits in the board
-            if (col + length > size)
+                if (horizontal) {
+            if (col + length > size) {
                 return false;
+            }
+
             for (int i = col; i < col + length; i++) {
-                if (grid[row][i] != '-')
+                if (i >= size || grid[row][i] != '-') {
                     return false;
+                }
+                grid[row][i] = 'S';
             }
         } else {
-            if (row + length > size)
+            if (row + length > size) {
                 return false;
+            }
+
             for (int i = row; i < row + length; i++) {
-                if (grid[i][col] != '-')
-                    return false;
-            }
-        }
-
-        for (int i = 0; i < length; i++) { // Checks if there is no a boat already there
-            if (horizontal) {
-                if (col + i >= size || grid[row][col + i] != '-') {
+                if (i >= size || grid[i][col] != '-') {
                     return false;
                 }
-            } else {
-                if (row + i >= size || grid[row + i][col] != '-') {
-                    return false;
-                }
-            }
-        }
-
-        for (int i = 0; i < length; i++) {
-            if (horizontal) {
-                grid[row][col + i] = 'S';
-            } else {
-                grid[row + i][col] = 'S';
+                grid[i][col] = 'S';
             }
         }
 
@@ -102,10 +86,10 @@ public class Board {
             return false;
         }
 
-        if (grid[row][col] == '-') {
+        if (grid[row][col] == '-') { // Misses
             grid[row][col] = 'O';
             return false;
-        } else if (grid[row][col] == 'S') {
+        } else if (grid[row][col] == 'S') { // Hits
             grid[row][col] = 'X';
             return true;
         } else if (grid[row][col] == 'X' || grid[row][col] == 'O') {
